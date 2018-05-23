@@ -4,7 +4,7 @@ class Enemy {
         this.rows = [60, 140, 220, 300];
         const randomRow = Math.round(Math.random() * 3);
 
-        this.x = 5; // 500 end
+        this.x = 5;
         this.y = this.rows[randomRow];
 
         this.sprite = 'images/enemy-bug.png';
@@ -31,7 +31,21 @@ class Player {
     }
 
     handleInput(key) {
-        // TODO: Implement
+        if (key === 'left' || key === 'a') {
+            if (this.x > 0)
+                this.x -= 100;
+        } else if (key === 'up' || key === 'w') {
+            if (this.y > -20) 
+                this.y -= 85;
+            else
+                this.x = 200, this.y = 405;
+        } else if (key === 'right' || key === 'd') {
+            if (this.x < 400)
+                this.x += 100; 
+        } else if (key === 'down' || key === 's') {
+            if (this.y < 405)
+                this.y += 85;
+        }
     }
 
     update() {
@@ -54,6 +68,10 @@ document.addEventListener('keyup', function(e) {
         38: 'up',
         39: 'right',
         40: 'down',
+        65: 'a',
+        87: 'w',
+        68: 'd',
+        83: 's'
     };
 
     player.handleInput(allowedKeys[e.keyCode]);
