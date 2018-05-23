@@ -1,26 +1,27 @@
 # PLAN
 
 ### **Game grid**
-* probably rendered automatically once Player and Enemy are implemented
-* 5 rows = grass, 4 x stone, grass
+* ~~probably rendered automatically once Player and Enemy are implemented~~
+* ~~5 rows = grass, 4 x stone, grass~~
 
 ### **Enemy class**
-* argument-less constructor
-* private const variable with available rows (4)
+* ~~random enemy position~~
+    * fix enemy overlapping
 * automatic speed generation 
 * build
-    * properties
-    * constructor
+    * ~~constructor~~
     * update
-    * render
+    * ~~render~~
 
 ### **Player class**
-* input / character control
-* lives
-* score
 * build
-    * properties
     * constructor
+    * ~~inputHandle~~
+    * update
+        * lives
+        * score
+    * ~~render~~
+* random player sprite
 
 ### **Character class**
 * image
