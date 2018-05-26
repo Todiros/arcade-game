@@ -10,6 +10,7 @@ class Enemy {
 
         // random speed setter (80 - 300)
         this.speed = Math.round(Math.random() * 220) + 80;
+        this.collision = false;
         this.sprite = 'images/enemy-bug.png';
     }
 
@@ -31,6 +32,13 @@ class Enemy {
             // randomizing enemy position on each update
             this.y = this.rows[this.setRow()];
         }
+
+        // check whether the player and the enemy are in the same row
+        // ... and if they're overlapping (colliding)
+        if (this.y == player.y && (this.x > player.x - 70 && this.x < player.x + 60)) {
+            player.reset();
+            this.collision = true;
+        };
     }
 
     render() {
