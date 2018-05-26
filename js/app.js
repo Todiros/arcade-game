@@ -90,7 +90,7 @@ class Player {
     }
 }
 
-let allEnemies = [new Enemy(), new Enemy(), new Enemy(), new Enemy()];
+let allEnemies = [new Enemy(), new Enemy(), new Enemy(), new Enemy(), new Enemy()];
 let player = new Player();
 
 // This listens for key presses and sends the keys to your
