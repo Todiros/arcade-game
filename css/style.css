@@ -1,3 +1,8 @@
 body {
     text-align: center;
 }
+
+.rickrolled {
+    display: none;
+    pointer-events: none;
+}
