@@ -53,8 +53,11 @@ class Player {
         
         this.lives = 3;
         this.score = 0;
+
+        this.moves = 0;
         this.collision = false;
         this.crossed = false;
+        this.unmoveable = false;
         this.sprite = 'images/char-boy.png';
     }
 
@@ -62,32 +65,50 @@ class Player {
     reset() {
         this.x = 200; 
         this.y = 400;
+        this.moves = 0;
     }
 
     handleInput(key) {
-        if (key === 'left' || key === 'a') {
-            if (this.x > 0)
-                this.x -= 100; // one column to the left
-        } else if (key === 'up' || key === 'w') {
-            if (this.y > 0) 
-                this.y -= 85; // one row up
-            else
-                // reset if player gets to the top aka wins
-                this.crossed = true;
-        } else if (key === 'right' || key === 'd') {
-            if (this.x < 400)
-                this.x += 100; // one column to the right
-        } else if (key === 'down' || key === 's') {
-            if (this.y < 400)
-                this.y += 85; // one row down
+        if (!this.unmoveable) {
+            if (key === 'left' || key === 'a') {
+                this.moves++;
+                if (this.x > 0)
+                    this.x -= 100; // one column to the left
+            } else if (key === 'up' || key === 'w') {
+                this.moves++;
+                if (this.y >= 60) 
+                    this.y -= 85; // one row up
+                if (this.y == -25) {
+                    this.unmoveable = true;
+                    setTimeout(() => { this.crossed = true; }, 400);
+                }
+            } else if (key === 'right' || key === 'd') {
+                this.moves++;
+                if (this.x < 400)
+                    this.x += 100; // one column to the right
+            } else if (key === 'down' || key === 's') {
+                this.moves++;
+                if (this.y < 400)
+                    this.y += 85; // one row down
+            }
         }
+        
+        console.log(this.moves);
     }
 
     update() {
         if (this.crossed) {
             this.crossed = false;
+            this.unmoveable = false;
             
-            this.reset();
+            if (this.moves === 5) {
+                score.count += 100;
+            } else if (this.moves < 10) {
+                score.count += this.moves * 10; 
+            }
+
+            score.count += 100;
+            player.reset();
         }
 
         if (this.collision) {
@@ -137,9 +158,26 @@ class Lives {
     }
 }
 
+class Score {
+    constructor() {
+        this.x = 20;
+        this.y = 575;
+
+        this.count = 0;
+    }
+
+    render() {
+        ctx.font = "20px Impact";
+        ctx.fillText("SCORE:", this.x, this.y);
+        ctx.font = "25px Impact";
+        ctx.fillText(this.count, this.x + 105, this.y);
+    }
+}
+
 let allEnemies = [new Enemy(), new Enemy(), new Enemy(), new Enemy(), new Enemy()];
 let player = new Player();
 let lives = new Lives();
+let score = new Score();
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this
