@@ -7,15 +7,15 @@
 ### **Enemy class**
 * ~~random enemy position~~
     * fix enemy overlapping
-* automatic speed generation 
+* ~~automatic speed generation~~
 * build
     * ~~constructor~~
-    * update
+    * ~~update~~
     * ~~render~~
 
 ### **Player class**
 * build
-    * constructor
+    * ~~constructor~~
     * ~~inputHandle~~
     * update
         * lives
@@ -30,8 +30,7 @@
     * update(dt)
 * render
 
-### **Collision**
-* *TODO*
+### **~~Collision~~**
 
 ### **Styling**
 * Mobile friendly
