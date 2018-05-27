@@ -10,7 +10,6 @@ class Enemy {
 
         // random speed setter (80 - 300)
         this.speed = Math.round(Math.random() * 220) + 80;
-        this.collision = false;
         this.sprite = 'images/enemy-bug.png';
     }
 
@@ -36,8 +35,7 @@ class Enemy {
         // check whether the player and the enemy are in the same row
         // ... and if they're overlapping (colliding)
         if (this.y == player.y && (this.x > player.x - 70 && this.x < player.x + 60)) {
-            player.reset();
-            this.collision = true;
+            player.collision = true;
         };
     }
 
@@ -46,6 +44,8 @@ class Enemy {
     }
 }
 
+// ----- PLAYER CLASS -----
+
 class Player {
     constructor() {
         this.x = 200;
@@ -53,6 +53,8 @@ class Player {
         
         this.lives = 3;
         this.score = 0;
+        this.collision = false;
+        this.crossed = false;
         this.sprite = 'images/char-boy.png';
     }
 
@@ -71,7 +73,7 @@ class Player {
                 this.y -= 85; // one row up
             else
                 // reset if player gets to the top aka wins
-                this.reset();
+                this.crossed = true;
         } else if (key === 'right' || key === 'd') {
             if (this.x < 400)
                 this.x += 100; // one column to the right
@@ -82,7 +84,18 @@ class Player {
     }
 
     update() {
-        // TODO: Implement
+        if (this.crossed) {
+            this.crossed = false;
+            
+            this.reset();
+        }
+
+        if (this.collision) {
+            this.collision = false;
+
+            lives.reduce();
+            player.reset();
+        }
     }
 
     render() {
@@ -90,8 +103,43 @@ class Player {
     }
 }
 
+class Lives {
+    constructor() {
+        this.x = 10;
+        this.y = 10;
+
+        this.count = 3;
+        this.sprite = 'images/Heart.png';
+
+        const spriteWidth = 40;
+        const spriteHeight = 60;
+    }
+
+    reduce() {
+        this.count--;
+    }
+
+    static get spriteWidth() {
+        return 40;
+    }
+
+    static get spriteHeight() {
+        return 60;
+    }
+
+    render() {
+        let xPos = this.x;
+
+        for (let index = 0; index < this.count; index++) {
+            ctx.drawImage(Resources.get(this.sprite), xPos, this.y, Lives.spriteWidth, Lives.spriteHeight);
+            xPos += this.x + 10;
+        }
+    }
+}
+
 let allEnemies = [new Enemy(), new Enemy(), new Enemy(), new Enemy(), new Enemy()];
 let player = new Player();
+let lives = new Lives();
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this
