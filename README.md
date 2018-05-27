@@ -1,4 +1,4 @@
-# Simple Arcade Game
+# The Frogger (An Arcade Game)
 ##### *A Udacity FEND Project*
 
 ## About The Game
