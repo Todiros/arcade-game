@@ -6,7 +6,6 @@
 
 ### **Enemy class**
 * ~~random enemy position~~
-    * fix enemy overlapping
 * ~~automatic speed generation~~
 * build
     * ~~constructor~~
@@ -18,23 +17,16 @@
     * ~~constructor~~
     * ~~inputHandle~~
     * update
-        * lives
-        * score
+        * ~~lives~~
+        * ~~score~~
     * ~~render~~
 * random player sprite
 
-### **Character class**
-* image
-* position
-* movement 
-    * update(dt)
-* render
 
 ### **~~Collision~~**
 
 ### **Styling**
-* Mobile friendly
 * Modal on loss
-* 3 x Hearts at the bottom left
-* Score on the top left
+* ~~3 x Hearts at the top left~~
+* ~~Score on the bottom left~~
     * *based on time of completion*
