@@ -92,8 +92,6 @@ class Player {
                     this.y += 85; // one row down
             }
         }
-        
-        console.log(this.moves);
     }
 
     update() {
@@ -117,6 +115,8 @@ class Player {
             lives.reduce();
             player.reset();
         }
+
+
     }
 
     render() {
@@ -188,17 +188,33 @@ function gameRestart() {
     score.reset();
 }
 
+
 let allEnemies = [new Enemy(), new Enemy(), new Enemy(), new Enemy(), new Enemy()];
 let player = new Player();
 let lives = new Lives();
 let score = new Score();
 
+function toggleModal() {
+    const modal = document.getElementsByClassName('modal')[0];
+
+    if (modal.style.display == "none") {
+        modal.style.display = "block";
+    } else {
+        modal.style.display = "none";
+    }
+}
 
 (() => {
     const restartBtn = document.getElementsByClassName('restart')[0];
-
+    const tryAgainBtn = document.getElementsByClassName('try-again')[0];
+    
     restartBtn.addEventListener('click', () => {
         gameRestart();
+    });
+
+    tryAgainBtn.addEventListener('click', () => {
+        toggleModal();
+        location.reload();
     });
 })();
 

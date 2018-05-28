@@ -28,6 +28,9 @@ body {
 .modal {
     z-index: 5;
     display: none;
+    background: radial-gradient(circle, rgba(96, 143, 145, 0.95), rgba(96, 143, 145, 0.4));
+    color: whitesmoke;
+    font: 500 35px 'Righteous', Courier, monospace;
 }
 
 .container {
@@ -40,7 +43,7 @@ body {
     transform: translateY(635px);
     margin-left: 260px;
 }
-.btn {
+.nav-el {
     list-style: none;
     display: inline;
     margin: 0 5px;
@@ -48,7 +51,7 @@ body {
     font: 300 15px 'Righteous', Courier, monospace;
 }
 
-.restart {
+.restart, .try-again {
     font: inherit;
     text-transform: inherit;
     background: none;
@@ -69,6 +72,19 @@ body {
 .title {
     font: 500 35px 'Righteous', Courier, monospace;
 }
+
+.lose-msg {
+    transform: translateY(160%);
+    text-shadow: 1px 1px blueviolet;
+}
+
+.try-again {   
+    color: blueviolet;
+    border: 1px solid blueviolet;
+    text-shadow: 1px 1px whitesmoke;
+}
+
+
 
 
 
