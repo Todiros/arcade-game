@@ -21,6 +21,10 @@ class Enemy {
         return Math.round(Math.random() * 3);
     }
 
+    freeze() {
+        this.speed = 0;
+    }
+
     update(dt) {
         this.x += dt * this.speed;
 
@@ -106,14 +110,20 @@ class Player {
             }
 
             score.count += 100;
-            player.reset();
+            this.reset();
         }
 
         if (this.collision) {
             this.collision = false;
 
             lives.reduce();
-            player.reset();
+            this.reset();
+
+            if (lives.count === 0) {
+                this.unmoveable = true;
+                pauseGame();
+                toggleModal();
+            }
         }
 
 
@@ -182,12 +192,17 @@ class Score {
     }
 }
 
+function pauseGame() {
+    allEnemies.forEach((enemy) => {
+        enemy.freeze();
+    })
+}
+
 function gameRestart() {
     player.reset();
     lives.reset();
     score.reset();
 }
-
 
 let allEnemies = [new Enemy(), new Enemy(), new Enemy(), new Enemy(), new Enemy()];
 let player = new Player();
@@ -197,7 +212,7 @@ let score = new Score();
 function toggleModal() {
     const modal = document.getElementsByClassName('modal')[0];
 
-    if (modal.style.display == "none") {
+    if (modal.style.display == "none" || !modal.style.display) {
         modal.style.display = "block";
     } else {
         modal.style.display = "none";
