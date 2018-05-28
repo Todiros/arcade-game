@@ -5,6 +5,11 @@ body {
     background: url('../images/background.png') center/cover no-repeat fixed;
 }
 
+.rickrolled {
+    display: none;
+    pointer-events: none;
+}
+
 .overlay, .modal {
     position: absolute;
     top: 0;
@@ -48,6 +53,7 @@ body {
     text-transform: inherit;
     background: none;
     border: 1px solid black;
+    cursor: pointer;
 }
 
 .restart:focus {
@@ -65,7 +71,4 @@ body {
 }
 
 
-.rickrolled {
-    display: none;
-    pointer-events: none;
-}
+

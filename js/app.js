@@ -140,6 +140,10 @@ class Lives {
         this.count--;
     }
 
+    reset() {
+        this.count = 3;
+    }
+
     static get spriteWidth() {
         return 40;
     }
@@ -166,6 +170,10 @@ class Score {
         this.count = 0;
     }
 
+    reset() {
+        this.count = 0;
+    }
+
     render() {
         ctx.font = "20px Impact";
         ctx.fillText("SCORE:", this.x, this.y);
@@ -174,14 +182,30 @@ class Score {
     }
 }
 
+function gameRestart() {
+    player.reset();
+    lives.reset();
+    score.reset();
+}
+
 let allEnemies = [new Enemy(), new Enemy(), new Enemy(), new Enemy(), new Enemy()];
 let player = new Player();
 let lives = new Lives();
 let score = new Score();
 
+
+(() => {
+    const restartBtn = document.getElementsByClassName('restart')[0];
+
+    restartBtn.addEventListener('click', () => {
+        gameRestart();
+    });
+})();
+
+
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this
-// and yet, I did
+// and yet, I did...
 document.addEventListener('keyup', function(e) {
     var allowedKeys = {
         37: 'left',
