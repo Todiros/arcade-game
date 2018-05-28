@@ -5,9 +5,14 @@ body {
     background: url('../images/background.png') center/cover no-repeat fixed;
 }
 
-.rickrolled {
+.easter-egg {
     display: none;
+    margin-top: 110px;
+    text-shadow: 1px 1px blueviolet;
+}
+.rickrolled {
     pointer-events: none;
+    margin-top: 110px;
 }
 
 .overlay, .modal {
@@ -28,7 +33,7 @@ body {
 .modal {
     z-index: 5;
     display: none;
-    background: radial-gradient(circle, rgba(96, 143, 145, 0.95), rgba(96, 143, 145, 0.4));
+    background: radial-gradient(circle, rgba(96, 143, 145, 0.98), rgba(96, 143, 145, 0.4));
     color: whitesmoke;
     font: 500 35px 'Righteous', Courier, monospace;
 }
@@ -78,8 +83,6 @@ body {
     text-decoration: none;
 
 }
-
-
 
 .lose-msg {
     transform: translateY(160%);

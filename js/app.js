@@ -2,6 +2,15 @@ class Enemy {
     constructor() {
         // random number between 0 and 3, coresponding to each row
         let randomRow = Math.round(Math.random() * 3);
+
+        let randomSprite = Math.round(Math.random() * 3);
+        const availableSprites = [
+            'images/enemy-bug.png', 
+            'images/blue-enemy-bug.png', 
+            'images/green-enemy-bug.png',
+            'images/red-enemy-bug.png'
+        ];
+
         this.rows = [60, 145, 230, 315];
 
         // initial position, outside canvas between -100 and -200
@@ -10,9 +19,10 @@ class Enemy {
 
         // random speed setter (80 - 300)
         this.speed = Math.round(Math.random() * 220) + 80;
-        this.sprite = 'images/enemy-bug.png';
+        this.sprite = availableSprites[randomSprite];
     }
 
+    // set the bug back to the starting position once it gets out of frame (canvas)
     setInitialX() {
         return -(Math.round(Math.random() * 100) + 100);
     }
@@ -21,6 +31,8 @@ class Enemy {
         return Math.round(Math.random() * 3);
     }
 
+    // pauses the bugs in their current position
+    // used when the modal on loss is displayed
     freeze() {
         this.speed = 0;
     }
@@ -54,9 +66,6 @@ class Player {
     constructor() {
         this.x = 200;
         this.y = 400;
-        
-        this.lives = 3;
-        this.score = 0;
 
         this.moves = 0;
         this.collision = false;
@@ -84,6 +93,7 @@ class Player {
                     this.y -= 85; // one row up
                 if (this.y == -25) {
                     this.unmoveable = true;
+                    // this allows the character to get to the last row before being reset back to the first row
                     setTimeout(() => { this.crossed = true; }, 400);
                 }
             } else if (key === 'right' || key === 'd') {
@@ -112,8 +122,10 @@ class Player {
             score.count += 100;
             this.reset();
 
-            if (score.count >= 1000 && score.count < 1300) {
+            if (score.count >= 1000 && score.count <= 1200) {
                 congratsMsg();
+            } else if (score.count >= 3000) {
+                surpriseScreen();
             }
         }
 
@@ -167,6 +179,7 @@ class Lives {
     render() {
         let xPos = this.x;
 
+        // renders heart sprites based on the current lives count
         for (let index = 0; index < this.count; index++) {
             ctx.drawImage(Resources.get(this.sprite), xPos, this.y, Lives.spriteWidth, Lives.spriteHeight);
             xPos += this.x + 10;
@@ -215,6 +228,19 @@ function congratsMsg() {
     const msg = document.getElementsByClassName('header-msg')[0];
 
     msg.innerHTML = 'Congrats! You reached 1000 points. Keep going! ;)';
+}
+
+function surpriseScreen() {
+    const loseMsg = document.getElementsByClassName('lose-msg')[0];
+    const easterEgg = document.getElementsByClassName('easter-egg')[0];
+    const rickrolled = document.getElementsByClassName('rickrolled')[0];
+
+    loseMsg.style.display = "none";
+    easterEgg.style.display = "block";
+
+    pauseGame();
+    toggleModal();
+    rickrolled.setAttribute('src', 'https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&showinfo=0&controls=0&disablekb=1&iv_load_policy=3');
 }
 
 function toggleModal() {
