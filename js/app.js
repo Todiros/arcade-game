@@ -111,6 +111,10 @@ class Player {
 
             score.count += 100;
             this.reset();
+
+            if (score.count >= 1000 && score.count < 1300) {
+                congratsMsg();
+            }
         }
 
         if (this.collision) {
@@ -125,8 +129,6 @@ class Player {
                 toggleModal();
             }
         }
-
-
     }
 
     render() {
@@ -208,6 +210,12 @@ let allEnemies = [new Enemy(), new Enemy(), new Enemy(), new Enemy(), new Enemy(
 let player = new Player();
 let lives = new Lives();
 let score = new Score();
+
+function congratsMsg() {
+    const msg = document.getElementsByClassName('header-msg')[0];
+
+    msg.innerHTML = 'Congrats! You reached 1000 points. Keep going! ;)';
+}
 
 function toggleModal() {
     const modal = document.getElementsByClassName('modal')[0];

@@ -37,6 +37,16 @@ body {
     position: relative;
     z-index: 2;
     height: 100%;
+    font-family:  'Righteous', Courier, monospace;
+}
+
+.title {
+    font: 500 35px 'Righteous', Courier, monospace;
+}
+
+.header-msg {
+    color: whitesmoke;
+    text-shadow: 1px 1px darkslategray;
 }
 
 .nav {
@@ -48,7 +58,7 @@ body {
     display: inline;
     margin: 0 5px;
     text-transform: uppercase;
-    font: 300 15px 'Righteous', Courier, monospace;
+    font: 300 15px;
 }
 
 .restart, .try-again {
@@ -69,9 +79,7 @@ body {
 
 }
 
-.title {
-    font: 500 35px 'Righteous', Courier, monospace;
-}
+
 
 .lose-msg {
     transform: translateY(160%);
